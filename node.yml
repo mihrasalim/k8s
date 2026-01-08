@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prom
+  labels:
+    app: node-exporter
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node-exporter
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+    spec:
+      containers:
+      - name: node
+        image: prom/node-exporter
+        ports:
+        - containerPort: 9100
+
