@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: onepiece
+spec:
+  containers:
+    - name: luffy
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+      volumeMounts:
+      - name: luffy
+        mountPath: /usr/share/nginx/
+  volumes:
+    - name: luffy
+      hostPath: 
+        path: /data/nginx
+        type: DirectoryOrCreate
+      
