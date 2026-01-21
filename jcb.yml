@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jcb
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jcb
+  template:
+    metadata:
+      labels:
+        app: jcb
+    spec:
+      containers:
+        - name: node
+          image: node:18-alpine
+          command: ["node"]
+          args:
+            - "-e"
+            - |
+              require('http')
+                .createServer((req, res) => {
+                  res.end('Hello from Minikube!')
+                })
+                .listen(3000)
+          ports:
+            - containerPort: 3000
