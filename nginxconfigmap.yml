@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sanji
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: mihras
+      mountPath: /usr/share/nginx/
+  volumes:
+  - name: mihras
+    configMap:
+      name: sanji
