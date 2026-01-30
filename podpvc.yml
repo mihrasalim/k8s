@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jjk
+spec:
+  containers:
+    - name: app
+      image: nginx:latest
+      volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: storage
+  volumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: mihras
