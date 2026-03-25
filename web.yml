@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webport
+  labels:
+    app: website
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    command: ["/bin/sh", "-c"]
+    args:
+      - echo '<!DOCTYPE html>
+       <html>
+       <head><title>My Website</title></head>
+       <body>
+       <h1>Welcome</h1>
+       <p>Server1</p>
+       <p>Server2</p>
+       </body>
+       </html>' > /usr/share/nginx/html/index.html && nginx -g 'daemon off;';
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: website
+spec:
+  type: NodePort
+  selector:
+    app: website
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30018
